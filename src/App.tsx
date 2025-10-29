@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Dashboard } from './modules/Dashboard/Dashboard';
 import { PersonalityProfiler } from './modules/PersonalityProfiler/PersonalityProfiler';
 import { CareerCompass } from './modules/CareerCompass/CareerCompass';
@@ -7,7 +7,7 @@ import { BudgetBuddy } from './modules/BudgetBuddy/BudgetBuddy';
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/personality" element={<PersonalityProfiler />} />
@@ -15,7 +15,7 @@ function App() {
         <Route path="/mindmesh" element={<MindMesh />} />
         <Route path="/budget" element={<BudgetBuddy />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
