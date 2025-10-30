@@ -4,13 +4,17 @@ import { motion } from 'framer-motion';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
 import { storage } from '../../utils/storage';
+import { WelcomeModal } from '../../components/WelcomeModal';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
   const [dailySync, setDailySync] = useState<any>(null);
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     const profile = storage.get('personalityProfile');
+    const hasCompleted = storage.get<boolean>('hasCompletedPersonalityQuiz') === true;
     const expenses = storage.get<any[]>('expenses') || [];
     const mood = storage.get('currentMood');
 
@@ -26,6 +30,14 @@ export const Dashboard = () => {
       spend: totalSpend,
       progress: profile ? 75 : 0,
     });
+
+    // First-time experience logic
+    if (!hasCompleted && !profile) {
+      setShowWelcome(true);
+    } else if (!hasCompleted) {
+      const bannerDismissed = sessionStorage.getItem('ls_banner_dismissed') === '1';
+      setShowBanner(!bannerDismissed);
+    }
   }, []);
 
   return (
@@ -40,6 +52,23 @@ export const Dashboard = () => {
           <p className="mt-2 text-[16px] text-teal-dark/80">Your Personal Development Companion</p>
         </div>
       </motion.div>
+
+      {showBanner && (
+        <div className="mb-6">
+          <div className="flex items-start justify-between gap-3 bg-turquoise/10 border border-turquoise/30 rounded-xl px-4 py-3">
+            <div className="text-turquoise/90 text-sm">
+              <button onClick={() => navigate('/personality')} className="underline underline-offset-4 hover:text-turquoise">👋 Complete your personality profile to unlock personalized insights</button>
+            </div>
+            <button
+              aria-label="Dismiss"
+              className="text-turquoise/60 hover:text-turquoise"
+              onClick={() => { sessionStorage.setItem('ls_banner_dismissed', '1'); setShowBanner(false); }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <motion.div
@@ -91,6 +120,11 @@ export const Dashboard = () => {
         </motion.div>
       </div>
     </div>
+    <WelcomeModal
+      open={showWelcome}
+      onStartQuiz={() => { setShowWelcome(false); navigate('/personality'); }}
+      onSkip={() => { setShowWelcome(false); setShowBanner(true); }}
+    />
   );
 };
 

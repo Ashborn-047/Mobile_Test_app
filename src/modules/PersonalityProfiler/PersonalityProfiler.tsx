@@ -27,8 +27,14 @@ export const PersonalityProfiler = () => {
     try {
       const result = await api.submitPersonalityQuiz(answers);
       storage.set('personalityProfile', result);
+      storage.set('hasCompletedPersonalityQuiz', true);
       setProfile(result);
       setShowQuiz(false);
+      // simple success interstitial then go home
+      setTimeout(() => {
+        alert('✨ Profile Complete! Your journey begins.');
+        navigate('/');
+      }, 400);
     } catch (error) {
       console.error('Error submitting quiz:', error);
     } finally {
