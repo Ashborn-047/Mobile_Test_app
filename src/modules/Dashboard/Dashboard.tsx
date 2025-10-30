@@ -31,14 +31,14 @@ export const Dashboard = () => {
   return (
     <div className="min-h-screen p-6 max-w-6xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center gap-4 mb-8"
+        className="mb-8"
       >
-        <div className="w-12 h-12 rounded-full bg-turquoise/20 flex items-center justify-center border border-turquoise/40">
-          <span className="text-turquoise text-xl font-bold">PB</span>
+        <div className="bg-gradient-to-r from-teal-light to-turquoise/70 rounded-2xl border border-turquoise/30 px-6 py-8 text-center shadow-[0_0_30px_rgba(9,218,198,0.08)]">
+          <h1 className="font-bold text-[28px] leading-tight text-teal-dark drop-shadow-sm">Lifesync</h1>
+          <p className="mt-2 text-[16px] text-teal-dark/80">Your Personal Development Companion</p>
         </div>
-        <h1 className="text-4xl font-bold text-turquoise">LifeSync AI</h1>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

@@ -63,11 +63,13 @@ export const MindMesh = () => {
         animate={{ opacity: 1 }}
         className="relative z-10"
       >
-        <Button onClick={() => navigate('/')} variant="secondary" className="mb-6">
+        <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
           ← Back to Dashboard
         </Button>
-        <h1 className="text-4xl font-bold text-turquoise mb-2">Mind Mesh</h1>
-        <p className="text-turquoise/70 mb-8">Find your center with AI-guided mindfulness</p>
+        <div className="bg-gradient-to-r from-teal-light to-turquoise/70 rounded-2xl border border-turquoise/30 px-6 py-7 text-center shadow-[0_0_30px_rgba(9,218,198,0.08)] mb-8">
+          <h1 className="font-bold text-[28px] leading-tight text-teal-dark">MindMesh</h1>
+          <p className="mt-2 text-[16px] text-teal-dark/80">Find your center with AI-guided mindfulness</p>
+        </div>
 
         {loading ? (
           <LoadingShimmer />

@@ -67,8 +67,10 @@ export const BudgetBuddy = () => {
         <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
           ← Back to Dashboard
         </Button>
-        <h1 className="text-4xl font-bold text-turquoise mb-2">Budget Buddy</h1>
-        <p className="text-turquoise/70">Track and categorize your expenses intelligently</p>
+        <div className="bg-gradient-to-r from-teal-light to-turquoise/70 rounded-2xl border border-turquoise/30 px-6 py-7 text-center shadow-[0_0_30px_rgba(9,218,198,0.08)]">
+          <h1 className="font-bold text-[28px] leading-tight text-teal-dark">BudgetBuddy</h1>
+          <p className="mt-2 text-[16px] text-teal-dark/80">Track and categorize your expenses intelligently</p>
+        </div>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

@@ -36,12 +36,21 @@ export const CareerCompass = () => {
 
   if (!profile) {
     return (
-      <div className="min-h-screen p-6 max-w-4xl mx-auto flex items-center justify-center">
+      <div className="min-h-screen p-6 max-w-4xl mx-auto">
+        <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
+          ← Back to Dashboard
+        </Button>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6"
+        >
+          <div className="bg-gradient-to-r from-teal-light to-turquoise/70 rounded-2xl border border-turquoise/30 px-6 py-7 text-center shadow-[0_0_30px_rgba(9,218,198,0.08)]">
+            <h1 className="font-bold text-[28px] leading-tight text-teal-dark">Career Compass</h1>
+            <p className="mt-2 text-[16px] text-teal-dark/80">Build your personality profile first to discover career matches</p>
+          </div>
+        </motion.div>
         <Card className="text-center">
-          <h1 className="text-4xl font-bold text-turquoise mb-4">Career Compass</h1>
-          <p className="text-turquoise/70 mb-8 text-lg">
-            Build your personality profile first to discover career matches
-          </p>
           <Button onClick={() => navigate('/personality')}>
             Take Personality Quiz
           </Button>
@@ -63,16 +72,18 @@ export const CareerCompass = () => {
 
   return (
     <div className="min-h-screen p-6 max-w-4xl mx-auto">
+      <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
+        ← Back to Dashboard
+      </Button>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
-          ← Back to Dashboard
-        </Button>
-        <h1 className="text-4xl font-bold text-turquoise mb-2">Career Compass</h1>
-        <p className="text-turquoise/70">Career paths tailored to your personality</p>
+        <div className="bg-gradient-to-r from-teal-light to-turquoise/70 rounded-2xl border border-turquoise/30 px-6 py-7 text-center shadow-[0_0_30px_rgba(9,218,198,0.08)]">
+          <h1 className="font-bold text-[28px] leading-tight text-teal-dark">Career Compass</h1>
+          <p className="mt-2 text-[16px] text-teal-dark/80">Career paths tailored to your personality</p>
+        </div>
       </motion.div>
 
       <div className="space-y-6">

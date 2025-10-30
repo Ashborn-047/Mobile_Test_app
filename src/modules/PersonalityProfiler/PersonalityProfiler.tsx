@@ -51,16 +51,18 @@ export const PersonalityProfiler = () => {
   if (profile) {
     return (
       <div className="min-h-screen p-6 max-w-4xl mx-auto">
+        <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
+          ← Back to Dashboard
+        </Button>
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
           className="mb-6"
         >
-          <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
-            ← Back to Dashboard
-          </Button>
-          <h1 className="text-4xl font-bold text-turquoise mb-2">Your Personality Profile</h1>
-          <p className="text-turquoise/70">Discover your unique traits and strengths</p>
+          <div className="bg-gradient-to-r from-teal-light to-turquoise/70 rounded-2xl border border-turquoise/30 px-6 py-7 text-center shadow-[0_0_30px_rgba(9,218,198,0.08)]">
+            <h1 className="font-bold text-[28px] leading-tight text-teal-dark">Personality Profiler</h1>
+            <p className="mt-2 text-[16px] text-teal-dark/80">Discover your unique traits and strengths</p>
+          </div>
         </motion.div>
 
         <Card className="mb-6">
@@ -91,16 +93,27 @@ export const PersonalityProfiler = () => {
   }
 
   return (
-    <div className="min-h-screen p-6 max-w-4xl mx-auto flex items-center justify-center">
+    <div className="min-h-screen p-6 max-w-4xl mx-auto">
+      <Button onClick={() => navigate('/')} variant="secondary" className="mb-4">
+        ← Back to Dashboard
+      </Button>
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-6"
+      >
+        <div className="bg-gradient-to-r from-teal-light to-turquoise/70 rounded-2xl border border-turquoise/30 px-6 py-7 text-center shadow-[0_0_30px_rgba(9,218,198,0.08)]">
+          <h1 className="font-bold text-[28px] leading-tight text-teal-dark">Personality Profiler</h1>
+          <p className="mt-2 text-[16px] text-teal-dark/80">Discover your unique personality traits through our AI-powered assessment</p>
+        </div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
       >
         <Card className="text-center">
-          <h1 className="text-4xl font-bold text-turquoise mb-4">Personality Profiler</h1>
           <p className="text-turquoise/70 mb-8 text-lg">
-            Discover your unique personality traits through our AI-powered assessment
+            Start your assessment to generate your profile.
           </p>
           <Button onClick={() => setShowQuiz(true)} className="text-lg px-8 py-4">
             Take Personality Quiz
