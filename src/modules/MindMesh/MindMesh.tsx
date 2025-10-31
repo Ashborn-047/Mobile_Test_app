@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
 import { LoadingShimmer } from '../../components/LoadingShimmer';
-import { api, Meditation } from '../../utils/api';
+import { api } from '../../utils/api'; // Removed Meditation from here
 import { storage } from '../../utils/storage';
 import { PersonalityProfileV2 } from '../Personality/types'; // Import PersonalityProfileV2
 import { gradients } from '../../theme'; // Import gradients from theme.ts
-import { MoodEntry, MeditationSession } from '../../utils/types'; // Import new types
+import { MoodEntry, MeditationSession } from '../../utils/types'; // Import MeditationSession
 
 export const MindMesh = () => {
   const navigate = useNavigate();
@@ -16,13 +16,13 @@ export const MindMesh = () => {
   const [goal, setGoal] = useState('');
   const [duration, setDuration] = useState(5);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Meditation | null>(null);
+  const [result, setResult] = useState<MeditationSession | null>(null); // Correctly typed as MeditationSession
   const [breathing, setBreathing] = useState(false);
   const [moodHistory, setMoodHistory] = useState<MoodEntry[]>([]); // New state for mood history
   const [meditationHistory, setMeditationHistory] = useState<MeditationSession[]>([]); // New state for meditation history
 
   useEffect(() => {
-    const saved = storage.get<Meditation>('lastMeditation');
+    const saved = storage.get<MeditationSession>('lastMeditation'); // Use MeditationSession here
     if (saved) {
       setResult(saved);
     }
@@ -67,9 +67,19 @@ export const MindMesh = () => {
       setMeditationHistory(updatedMeditationHistory);
       storage.set('meditationHistory', updatedMeditationHistory);
 
-      setResult(meditation);
+      const sessionToSet = {
+        id: newMeditationSession.id, // Use the generated ID
+        type: meditation.type,
+        text: meditation.text,
+        duration: meditation.duration,
+        personalityInsight: meditation.personalityInsight,
+        timestamp: newMeditationSession.timestamp, // Use the generated timestamp
+        moodBefore: newMeditationSession.moodBefore, // Use the collected moodBefore
+      };
+
+      setResult(sessionToSet);
       storage.set('currentMood', mood);
-      storage.set('lastMeditation', meditation);
+      storage.set('lastMeditation', sessionToSet);
       setBreathing(true);
     } catch (error) {
       console.error('Error generating meditation:', error);

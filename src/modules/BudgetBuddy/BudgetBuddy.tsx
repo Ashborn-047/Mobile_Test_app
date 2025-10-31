@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
-import { api, Expense } from '../../utils/api';
+import { api } from '../../utils/api';
+import { Expense } from '../../utils/types'; // Corrected import path for Expense
 import { storage } from '../../utils/storage';
 import { BudgetCSVImport } from "../Budget/components/BudgetCSVImport";
 

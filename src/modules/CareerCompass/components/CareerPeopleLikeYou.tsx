@@ -1,60 +1,55 @@
 import { motion } from 'framer-motion';
 import { Card } from '../../../components/Card';
-import { Button } from '../../../components/Button'; // Import Button component
+import { Button } from '../../../components/Button';
 import { AnimatedAvatarV2 } from '../../Personality/components/AnimatedAvatarV2';
-import { gradients } from '../../../theme';
 
 interface FamousPerson {
   name: string;
+  description: string;
   emoji: string;
-  commonPath: string;
-  whySimilar: string;
 }
 
-const mockFamousPeople: FamousPerson[] = [
-  {
-    name: 'Steve Jobs',
-    emoji: '🍏',
-    commonPath: 'Entrepreneur',
-    whySimilar: 'Visionary, creative, disruptor',
-  },
+const mockPeople: FamousPerson[] = [
   {
     name: 'Elon Musk',
+    description: 'Visionary entrepreneur & innovator in space, AI, and energy.',
     emoji: '🚀',
-    commonPath: 'Innovator',
-    whySimilar: 'Driven, ambitious, pushes boundaries',
   },
   {
-    name: 'Lady Gaga',
-    emoji: '🎤',
-    commonPath: 'Creative',
-    whySimilar: 'Expressive, artistic, bold',
+    name: 'Oprah Winfrey',
+    description: 'Media mogul, philanthropist, and influential talk show host.',
+    emoji: '🌟',
   },
   {
-    name: 'Albert Einstein',
-    emoji: '🧠',
-    commonPath: 'Thinker',
-    whySimilar: 'Curious, analytical, unconventional',
+    name: 'Steve Jobs',
+    description: 'Co-founder of Apple, revolutionized personal computing & mobile.',
+    emoji: '🍎',
+  },
+  {
+    name: 'Marie Curie',
+    description: 'Pioneering physicist & chemist, first woman to win a Nobel Prize.',
+    emoji: '🧪',
   },
 ];
 
-export const CareerPeopleLikeYou = () => {
+export const CareerPeopleLikeYou: React.FC = () => {
   return (
-    <div className="flex overflow-x-auto pb-4 space-x-4">
-      {mockFamousPeople.map((person, index) => (
+    <div className="flex overflow-x-auto pb-4 space-x-4 justify-center">
+      {mockPeople.map((person) => (
         <motion.div
           key={person.name}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1, duration: 0.3 }}
-          className="min-w-[200px]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="min-w-[200px] flex-shrink-0"
         >
-          <Card className="h-full text-center p-4 bg-gray-50 border-gray-200 hover:shadow-md transition-shadow">
+          <Card className="p-4 bg-gray-50 border-gray-200 text-center flex flex-col items-center">
             <AnimatedAvatarV2 emoji={person.emoji} size="sm" />
             <h3 className="font-semibold text-lg text-dark-teal mt-2">{person.name}</h3>
-            <p className="text-gray-700 text-sm">Common path: {person.commonPath}</p>
-            <p className="text-gray-600 text-xs mt-1">"{person.whySimilar}"</p>
-            <Button variant="secondary" className="mt-4 w-full text-xs" onClick={() => alert(`Showing more about ${person.name}`)}>View Details</Button>
+            <p className="text-sm text-gray-700 mt-1">{person.description}</p>
+            <Button variant="secondary" className="mt-3 text-xs">
+              View Full Story →
+            </Button>
           </Card>
         </motion.div>
       ))}

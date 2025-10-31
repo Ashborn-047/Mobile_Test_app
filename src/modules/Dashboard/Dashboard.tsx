@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
 import { storage } from '../../utils/storage';
 import { WelcomeModal } from '../../components/WelcomeModal';
 import { PersonalityProfileV2 } from '../Personality/types';
-import { AnimatedAvatarV2 } from '../Personality/components/AnimatedAvatarV2';
 import { gradients } from '../../theme'; // Import gradients from theme.ts
 import { ProfileCard } from './components/ProfileCard'; // Import the new ProfileCard
+import { api } from '../../utils/api'; // Import the API utility
 
 // Placeholder components for the new Bento grid cards
 const DailySyncCard = ({ dailySync }: { dailySync: any }) => (
@@ -27,7 +27,7 @@ const QuickTipCard = () => (
   </Card>
 );
 
-const PersonalityDisplayCard = ({ profile, navigate }: { profile: PersonalityProfileV2 | null, navigate: (path: string) => void }) => (
+const PersonalityDisplayCard = ({ profile, navigate }: { profile: PersonalityProfileV2 | null, navigate: NavigateFunction }) => (
   <Card className={`${gradients.personalityCard} col-span-1 md:col-span-7 h-64 flex flex-col justify-between`}>
     <div>
       <h3 className="text-xl font-semibold text-white">Your Personality</h3>
@@ -42,7 +42,7 @@ const PersonalityDisplayCard = ({ profile, navigate }: { profile: PersonalityPro
   </Card>
 );
 
-const CareerMatchCard = ({ careers, navigate }: { careers: any[], navigate: (path: string) => void }) => (
+const CareerMatchCard = ({ careers, navigate }: { careers: any[], navigate: NavigateFunction }) => (
   <Card className={`${gradients.careerCard} col-span-1 md:col-span-5 h-64 flex flex-col justify-between`}>
     <div>
       <h3 className="text-xl font-semibold text-white">Career Match</h3>
@@ -56,13 +56,13 @@ const CareerMatchCard = ({ careers, navigate }: { careers: any[], navigate: (pat
   </Card>
 );
 
-const QuickActionButtons = ({ navigate }: { navigate: (path: string) => void }) => (
+const QuickActionButtons = ({ navigate, onShowStats }: { navigate: NavigateFunction; onShowStats: () => void }) => (
   <>
     <Button className={`${gradients.quickActionsCard} col-span-2`} onClick={() => navigate('/personality')}>Take Quiz</Button>
     <Button className={`${gradients.quickActionsCard} col-span-3`} onClick={() => navigate('/career')}>Explore Careers</Button>
     <Button className={`${gradients.quickActionsCard} col-span-2`} onClick={() => navigate('/mindmesh')}>Mind Mesh</Button>
     <Button className={`${gradients.quickActionsCard} col-span-3`} onClick={() => navigate('/budget')}>Budget Buddy</Button>
-    <Button className={`${gradients.quickActionsCard} col-span-2`} onClick={() => navigate('/')}>Stats Card</Button>
+    <Button className={`${gradients.quickActionsCard} col-span-2`} onClick={onShowStats}>Stats Card</Button>
   </>
 );
 

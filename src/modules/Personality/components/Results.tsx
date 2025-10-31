@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '../../../../src/components/Card';
 import { Button } from '../../../../src/components/Button';
 import { LoadingShimmer } from '../../../../src/components/LoadingShimmer';
-import { RadarChartComponent } from '../../../../src/components/RadarChart';
-import { PersonalityProfileV2, PersonalityTrait } from '../types';
+// import { RadarChartComponent } from '../../../../src/components/RadarChart'; // Removed unused import
+import { PersonalityProfileV2 /*, PersonalityTrait */ } from '../types'; // Removed unused PersonalityTrait import
 import { storage } from '../../../../src/utils/storage';
 import { generatePersonalitySummary } from '../utils';
 import { AnimatedAvatarV2 } from './AnimatedAvatarV2';
-import { ResultsCard } from './ResultsCard'; // Used for basic profile display
+// import { ResultsCard } from './ResultsCard'; // Removed unused import
 import { generatePersonalityCard } from '../../../../src/utils/share'; // Import share utility
 
 interface PersonalityResultsProps {

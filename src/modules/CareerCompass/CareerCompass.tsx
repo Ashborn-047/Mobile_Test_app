@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
 import { LoadingShimmer } from '../../components/LoadingShimmer';
-import { api, Career } from '../../utils/api';
+import { api } from '../../utils/api';
+import { Career } from '../../utils/types'; // Corrected import path for Career
 import { storage } from '../../utils/storage';
 import { PersonalityProfileV2 } from '../Personality/types';
-import { gradients } from '../../theme'; // Import gradients for card backgrounds
 import { CareerPathCard } from './components/CareerPathCard'; // Import the new CareerPathCard
 import { HybridCareerCard, mockHybridCareers } from './components/HybridCareerCard'; // Import HybridCareerCard and mock data
 import { CareerReadingList } from './components/CareerReadingList'; // Import CareerReadingList
