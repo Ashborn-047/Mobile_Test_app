@@ -1,11 +1,11 @@
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Dashboard } from './modules/Dashboard/Dashboard';
-import { PersonalityPage } from './modules/Personality/index';
-import { CareerCompass } from './modules/CareerCompass/CareerCompass';
-import { MindMesh } from './modules/MindMesh/MindMesh';
-import { BudgetBuddy } from './modules/BudgetBuddy/BudgetBuddy';
-import { Layout } from './components/common/Layout';
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Dashboard } from "./modules/Dashboard/Dashboard";
+import { PersonalityPage } from "./modules/Personality/index";
+import { CareerCompass } from "./modules/CareerCompass/CareerCompass";
+import { MindMesh } from "./modules/MindMesh/MindMesh";
+import { BudgetBuddy } from "./modules/BudgetBuddy/BudgetBuddy";
+import { Layout } from "./components/common/Layout";
 
 function App() {
   return (
@@ -41,4 +41,3 @@ function RouteTransitions() {
 }
 
 export default App;
-

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '../../../../src/components/Button';
-import { ProgressBar } from '../../../../src/components/ProgressBar';
-import { Card } from '../../../../src/components/Card';
-import { personalityQuestions } from '../utils';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "../../../../src/components/Button";
+import { ProgressBar } from "../../../../src/components/ProgressBar";
+import { Card } from "../../../../src/components/Card";
+import { personalityQuestions } from "../utils";
 
 interface PersonalityQuizProps {
   onComplete: (answers: Record<string, number>) => void;
@@ -18,7 +18,10 @@ export const PersonalityQuiz = ({
   const [answers, setAnswers] = useState<Record<string, number>>({});
 
   const handleAnswer = (value: number) => {
-    const newAnswers = { ...answers, [personalityQuestions[currentIndex].id]: value };
+    const newAnswers = {
+      ...answers,
+      [personalityQuestions[currentIndex].id]: value,
+    };
     setAnswers(newAnswers);
 
     if (currentIndex < personalityQuestions.length - 1) {
@@ -36,7 +39,10 @@ export const PersonalityQuiz = ({
         ← Back
       </Button>
 
-      <ProgressBar progress={progress} label={`Question ${currentIndex + 1} of ${personalityQuestions.length}`} />
+      <ProgressBar
+        progress={progress}
+        label={`Question ${currentIndex + 1} of ${personalityQuestions.length}`}
+      />
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -55,14 +61,20 @@ export const PersonalityQuiz = ({
                 <Button
                   key={value}
                   onClick={() => handleAnswer(value)}
-                  variant="secondary"
+                  variant={
+                    answers[personalityQuestions[currentIndex].id] === value
+                      ? "primary"
+                      : "secondary"
+                  }
+                  whileHover={{ scale: 1.02, transition: { duration: 0.1 } }}
+                  whileTap={{ scale: 0.98 }}
                   className="w-full text-left justify-center"
                 >
-                  {value === 1 && 'Strongly Disagree'}
-                  {value === 2 && 'Disagree'}
-                  {value === 3 && 'Neutral'}
-                  {value === 4 && 'Agree'}
-                  {value === 5 && 'Strongly Agree'}
+                  {value === 1 && "Strongly Disagree"}
+                  {value === 2 && "Disagree"}
+                  {value === 3 && "Neutral"}
+                  {value === 4 && "Agree"}
+                  {value === 5 && "Strongly Agree"}
                 </Button>
               ))}
             </div>

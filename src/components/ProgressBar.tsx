@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface ProgressBarProps {
   progress: number;
@@ -20,4 +20,3 @@ export const ProgressBar = ({ progress, label }: ProgressBarProps) => {
     </div>
   );
 };
-

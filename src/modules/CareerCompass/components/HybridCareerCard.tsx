@@ -1,97 +1,9 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Card } from '../../../components/Card';
-import { Button } from '../../../components/Button';
-import { gradients } from '../../../theme';
-
-interface HybridCareer {
-  id: string;
-  title: string;
-  emoji: string;
-  combination: string;
-  howToCombine: string[];
-  incomeStreams: string[];
-  lifestyleBenefits: string[];
-  examplePeople: { name: string; description: string }[];
-}
-
-const mockHybridCareers: HybridCareer[] = [
-  {
-    id: 'hc1',
-    title: 'Artist + Tech',
-    emoji: '🎨+💻',
-    combination: 'Creative Technologist',
-    howToCombine: [
-      'Learn coding for interactive art',
-      'Design user interfaces for creative apps',
-      'Create digital installations',
-    ],
-    incomeStreams: [
-      'Freelance design/development',
-      'Art sales',
-      'Workshop facilitation',
-    ],
-    lifestyleBenefits: [
-      'High creative freedom',
-      'Flexible work hours',
-      'Impactful innovation',
-    ],
-    examplePeople: [
-      { name: 'Refik Anadol', description: 'AI and data artist' },
-      { name: 'Zach Lieberman', description: 'Artist, educator, programmer' },
-    ],
-  },
-  {
-    id: 'hc2',
-    title: 'Travel + Work',
-    emoji: '✈️+💼',
-    combination: 'Digital Nomad / Consultant',
-    howToCombine: [
-      'Offer consulting services remotely',
-      'Create online courses',
-      'Start a travel blog/vlog',
-    ],
-    incomeStreams: [
-      'Consulting fees',
-      'Course sales',
-      'Affiliate marketing',
-    ],
-    lifestyleBenefits: [
-      'Location independence',
-      'Cultural immersion',
-      'Continuous learning',
-    ],
-    examplePeople: [
-      { name: 'Pieter Levels', description: 'Founder of Nomad List' },
-      { name: 'Anja & Philipp', description: 'Travel bloggers (Travel On Toast)' },
-    ],
-  },
-  {
-    id: 'hc3',
-    title: 'Teacher + Creator',
-    emoji: '🎓+📱',
-    combination: 'EdTech Content Creator',
-    howToCombine: [
-      'Develop educational apps',
-      'Create engaging online courses',
-      'Produce educational YouTube videos',
-    ],
-    incomeStreams: [
-      'App/course sales',
-      'YouTube ad revenue',
-      'Brand sponsorships',
-    ],
-    lifestyleBenefits: [
-      'Reach wider audience',
-      'Flexible teaching methods',
-      'High impact on learning',
-    ],
-    examplePeople: [
-      { name: 'Sal Khan', description: 'Founder of Khan Academy' },
-      { name: 'Veritasium (Derek Muller)', description: 'Science educator on YouTube' },
-    ],
-  },
-];
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Card } from "../../../components/Card";
+import { Button } from "../../../components/Button";
+import { gradients } from "../../../theme";
+import { HybridCareer } from "./utils"; // Only import HybridCareer, not mockHybridCareers
 
 interface HybridCareerCardProps {
   career: HybridCareer;
@@ -105,7 +17,10 @@ export const HybridCareerCard = ({ career }: HybridCareerCardProps) => {
       {/* Collapsed Card View */}
       <motion.div
         className={`min-w-[200px] h-32 flex flex-col items-center justify-center p-4 rounded-xl shadow-lg cursor-pointer ${gradients.quickActionsCard}`}
-        whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
+        whileHover={{
+          scale: 1.05,
+          boxShadow: "0 0 20px rgba(255,255,255,0.2)",
+        }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsModalOpen(true)}
       >
@@ -123,7 +38,10 @@ export const HybridCareerCard = ({ career }: HybridCareerCardProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="absolute inset-0 bg-dark-teal/70" onClick={() => setIsModalOpen(false)} />
+            <div
+              className="absolute inset-0 bg-dark-teal/70"
+              onClick={() => setIsModalOpen(false)}
+            />
             <motion.div
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -131,41 +49,68 @@ export const HybridCareerCard = ({ career }: HybridCareerCardProps) => {
               transition={{ type: "spring", stiffness: 100, damping: 15 }}
               className="relative z-10 w-full max-w-2xl bg-cream-light rounded-2xl p-8 shadow-xl text-dark-teal overflow-y-auto max-h-[90vh]"
             >
-              <Button onClick={() => setIsModalOpen(false)} variant="secondary" className="absolute top-4 right-4 p-2 text-dark-teal/70 hover:text-dark-teal border-dark-teal/30 hover:border-dark-teal">
+              <Button
+                onClick={() => setIsModalOpen(false)}
+                variant="secondary"
+                className="absolute top-4 right-4 p-2 text-dark-teal/70 hover:text-dark-teal border-dark-teal/30 hover:border-dark-teal"
+              >
                 ✕
               </Button>
-              <h2 className="text-3xl font-bold mb-4 text-center">{career.emoji} {career.title}</h2>
-              <p className="text-lg text-dark-teal/80 text-center mb-6">Your path as a **{career.combination}**</p>
+              <h2 className="text-3xl font-bold mb-4 text-center">
+                {career.emoji} {career.title}
+              </h2>
+              <p className="text-lg text-dark-teal/80 text-center mb-6">
+                Your path as a **{career.combination}**
+              </p>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">How to Combine:</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    How to Combine:
+                  </h3>
                   <ul className="list-disc list-inside space-y-1 text-dark-teal/90">
-                    {career.howToCombine.map((item, i) => <li key={i}>{item}</li>)}
+                    {career.howToCombine.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">Potential Income Streams:</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Potential Income Streams:
+                  </h3>
                   <ul className="list-disc list-inside space-y-1 text-dark-teal/90">
-                    {career.incomeStreams.map((item, i) => <li key={i}>{item}</li>)}
+                    {career.incomeStreams.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">Lifestyle Benefits:</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Lifestyle Benefits:
+                  </h3>
                   <ul className="list-disc list-inside space-y-1 text-dark-teal/90">
-                    {career.lifestyleBenefits.map((item, i) => <li key={i}>{item}</li>)}
+                    {career.lifestyleBenefits.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">Famous Examples:</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Famous Examples:
+                  </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                     {career.examplePeople.map((person, i) => (
-                      <Card key={i} className="p-4 bg-gray-50 border-gray-200 text-gray-800">
+                      <Card
+                        key={i}
+                        className="p-4 bg-gray-50 border-gray-200 text-gray-800"
+                      >
                         <p className="font-semibold">{person.name}</p>
-                        <p className="text-sm text-gray-600">{person.description}</p>
+                        <p className="text-sm text-gray-600">
+                          {person.description}
+                        </p>
                       </Card>
                     ))}
                   </div>
@@ -178,5 +123,3 @@ export const HybridCareerCard = ({ career }: HybridCareerCardProps) => {
     </>
   );
 };
-
-export { mockHybridCareers };

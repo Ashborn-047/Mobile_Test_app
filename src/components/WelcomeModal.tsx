@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from './Button';
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "./Button";
 
 interface WelcomeModalProps {
   open: boolean;
@@ -7,7 +7,11 @@ interface WelcomeModalProps {
   onSkip: () => void;
 }
 
-export const WelcomeModal = ({ open, onStartQuiz, onSkip }: WelcomeModalProps) => {
+export const WelcomeModal = ({
+  open,
+  onStartQuiz,
+  onSkip,
+}: WelcomeModalProps) => {
   return (
     <AnimatePresence>
       {open && (
@@ -26,11 +30,17 @@ export const WelcomeModal = ({ open, onStartQuiz, onSkip }: WelcomeModalProps) =
             className="relative z-10 w-full max-w-xl"
           >
             <div className="bg-gradient-to-b from-teal-light to-dark-teal rounded-2xl border border-turquoise/30 p-8 shadow-[0_0_40px_rgba(9,218,198,0.12)] text-center">
-              <h2 className="font-bold text-[28px] leading-tight text-turquoise">Welcome to Lifesync! 🎉</h2>
-              <p className="mt-3 text-[16px] text-turquoise/80">Let's discover who you are to personalize your journey</p>
+              <h2 className="font-bold text-[28px] leading-tight text-turquoise">
+                Welcome to Lifesync! 🎉
+              </h2>
+              <p className="mt-3 text-[16px] text-turquoise/80">
+                Let's discover who you are to personalize your journey
+              </p>
 
               <div className="mt-8 flex flex-col gap-3">
-                <Button onClick={onStartQuiz} className="w-full">Take 2-Minute Personality Quiz</Button>
+                <Button onClick={onStartQuiz} className="w-full">
+                  Take 2-Minute Personality Quiz
+                </Button>
                 <button
                   onClick={onSkip}
                   className="text-turquoise/70 hover:text-turquoise text-sm underline-offset-4 hover:underline"
@@ -45,4 +55,3 @@ export const WelcomeModal = ({ open, onStartQuiz, onSkip }: WelcomeModalProps) =
     </AnimatePresence>
   );
 };
-

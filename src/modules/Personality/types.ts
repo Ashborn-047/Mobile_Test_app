@@ -9,7 +9,7 @@ export interface PersonalityProfileV2 {
   traits: PersonalityTrait[];
   radarData: PersonalityTrait[];
   createdAt: string;
-  emoji: string; 
+  emoji: string;
   brainDominance: number;
   personalityType: string;
   superpower: string;
@@ -20,7 +20,7 @@ export interface ComparisonResult {
   trait: string;
   valueBefore: number;
   valueAfter: number;
-  change: 'up' | 'down' | 'same';
+  change: "up" | "down" | "same";
 }
 
 export interface QuizAnswer {

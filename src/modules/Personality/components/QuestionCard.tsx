@@ -1,6 +1,6 @@
-import { Button } from '../../../../src/components/Button';
-import { Card } from '../../../../src/components/Card';
-import { QuizQuestion } from '../types';
+import { Button } from "../../../../src/components/Button";
+import { Card } from "../../../../src/components/Card";
+import { QuizQuestion } from "../types";
 
 interface QuestionCardProps {
   question: QuizQuestion;
@@ -21,11 +21,11 @@ export const QuestionCard = ({ question, onAnswer }: QuestionCardProps) => {
             variant="secondary"
             className="w-full text-left justify-center"
           >
-            {value === 1 && 'Strongly Disagree'}
-            {value === 2 && 'Disagree'}
-            {value === 3 && 'Neutral'}
-            {value === 4 && 'Agree'}
-            {value === 5 && 'Strongly Agree'}
+            {value === 1 && "Strongly Disagree"}
+            {value === 2 && "Disagree"}
+            {value === 3 && "Neutral"}
+            {value === 4 && "Agree"}
+            {value === 5 && "Strongly Agree"}
           </Button>
         ))}
       </div>

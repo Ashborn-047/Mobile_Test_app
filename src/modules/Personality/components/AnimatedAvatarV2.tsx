@@ -1,15 +1,18 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface AnimatedAvatarV2Props {
   emoji: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 }
 
-export const AnimatedAvatarV2 = ({ emoji, size = 'md' }: AnimatedAvatarV2Props) => {
+export const AnimatedAvatarV2 = ({
+  emoji,
+  size = "md",
+}: AnimatedAvatarV2Props) => {
   const sizeClasses = {
-    sm: 'w-10 h-10 text-xl',
-    md: 'w-16 h-16 text-3xl',
-    lg: 'w-24 h-24 text-5xl',
+    sm: "w-10 h-10 text-xl",
+    md: "w-16 h-16 text-3xl",
+    lg: "w-24 h-24 text-5xl",
   };
 
   return (

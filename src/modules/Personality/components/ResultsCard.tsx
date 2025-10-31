@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import { Card } from '../../../../src/components/Card';
-import { PersonalityProfileV2 } from '../types';
-import { AnimatedAvatarV2 } from './AnimatedAvatarV2';
+import { motion } from "framer-motion";
+import { Card } from "../../../../src/components/Card";
+import { PersonalityProfileV2 } from "../types";
+import { AnimatedAvatarV2 } from "./AnimatedAvatarV2";
 
 interface ResultsCardProps {
   profile: PersonalityProfileV2;
@@ -13,11 +13,17 @@ export const ResultsCard = ({ profile }: ResultsCardProps) => {
       <div className="flex items-center gap-4 mb-4">
         <AnimatedAvatarV2 emoji={profile.emoji} size="lg" />
         <div>
-          <h2 className="text-2xl font-semibold text-turquoise">Your Persona</h2>
-          <p className="text-turquoise/70 text-sm">Generated {new Date(profile.createdAt).toLocaleDateString()}</p>
+          <h2 className="text-2xl font-semibold text-turquoise">
+            Your Persona
+          </h2>
+          <p className="text-turquoise/70 text-sm">
+            Generated {new Date(profile.createdAt).toLocaleDateString()}
+          </p>
         </div>
       </div>
-      <p className="text-turquoise/90 leading-relaxed mb-4">{profile.summary}</p>
+      <p className="text-turquoise/90 leading-relaxed mb-4">
+        {profile.summary}
+      </p>
       <div className="flex flex-wrap gap-2">
         {profile.traits.map((trait) => (
           <motion.span
