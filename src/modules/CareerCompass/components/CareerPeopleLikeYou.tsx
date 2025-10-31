@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '../../../components/Card';
 import { Button } from '../../../components/Button';

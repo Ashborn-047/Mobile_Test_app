@@ -1,37 +1,7 @@
 // Mock API layer
 
-import { PersonalityProfileV2, Career, Meditation, Expense } from './types';
-
-export interface PersonalityProfile {
-  id: string;
-  traits: string[];
-  summary: string;
-  radarData: { trait: string; value: number }[];
-  createdAt: string;
-}
-
-export interface Career {
-  id: string;
-  title: string;
-  description: string;
-  skills: string[];
-  matchScore: number;
-  progress: number;
-}
-
-export interface Meditation {
-  type: 'affirmation' | 'meditation';
-  text: string;
-  duration: number;
-}
-
-export interface Expense {
-  id: string;
-  amount: number;
-  category: string;
-  description: string;
-  date: string;
-}
+import { PersonalityProfileV2, Career, Meditation, Expense, PersonalityTrait } from './types';
+export type { Expense }; // Explicitly re-export Expense as a type
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -75,9 +45,9 @@ export const api = {
     ];
     // Mock logic to adjust matchScore based on personality traits
     if (profile) {
-      const opennessTrait = profile.traits.find(t => t.trait === 'Openness');
-      const conscientiousnessTrait = profile.traits.find(t => t.trait === 'Conscientiousness');
-      const extraversionTrait = profile.traits.find(t => t.trait === 'Extraversion');
+      const opennessTrait = profile.traits.find((t: PersonalityTrait) => t.trait === 'Openness');
+      const conscientiousnessTrait = profile.traits.find((t: PersonalityTrait) => t.trait === 'Conscientiousness');
+      const extraversionTrait = profile.traits.find((t: PersonalityTrait) => t.trait === 'Extraversion');
 
       if (opennessTrait && opennessTrait.value > 60) {
         // Higher openness means better match for creative roles
@@ -94,7 +64,7 @@ export const api = {
       }
     }
 
-    return careers.sort((a, b) => b.matchScore - a.matchScore);
+    return careers.sort((a: Career, b: Career) => b.matchScore - a.matchScore);
   },
 
   // MindMesh
@@ -117,7 +87,7 @@ export const api = {
     
     let personalityInsight = "";
     if (personalityProfile) {
-      const topTrait = personalityProfile.traits.sort((a, b) => b.value - a.value)[0];
+      const topTrait = personalityProfile.traits.sort((a: PersonalityTrait, b: PersonalityTrait) => b.value - a.value)[0];
       if (topTrait) {
         switch (topTrait.trait) {
           case 'Openness':

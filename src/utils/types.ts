@@ -1,3 +1,54 @@
+export interface PersonalityTrait {
+  trait: string;
+  value: number;
+}
+
+export interface PersonalityProfileV2 {
+  id: string;
+  summary: string;
+  traits: PersonalityTrait[];
+  radarData: PersonalityTrait[];
+  createdAt: string;
+  emoji: string;
+  brainDominance: number; // Added
+  personalityType: string; // Added
+  superpower: string; // Added
+  challenge: string; // Added
+}
+
+export interface ComparisonResult {
+  trait: string;
+  valueBefore: number;
+  valueAfter: number;
+  change: 'up' | 'down' | 'same';
+}
+
+export interface QuizAnswer {
+  id: string;
+  value: number;
+}
+
+export interface QuizQuestion {
+  id: string;
+  text: string;
+  category: string;
+}
+
+export interface DailyInsight {
+  id: string;
+  text: string;
+  category: string;
+}
+
+export interface Career {
+  id: string;
+  title: string;
+  description: string;
+  skills: string[];
+  matchScore: number;
+  progress: number;
+}
+
 export interface Meditation {
   type: 'affirmation' | 'meditation';
   text: string;

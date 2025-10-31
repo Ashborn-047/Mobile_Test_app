@@ -39,7 +39,7 @@ export const History = () => {
     } else if (profile.id === selectedProfile1.id) {
       setSelectedProfile1(null);
       setSelectedProfile2(null); // Reset if same profile is clicked again
-    } else if (profile.id === selectedProfile2.id) {
+    } else if (selectedProfile2 && profile.id === selectedProfile2.id) {
       setSelectedProfile2(null);
     }
   };

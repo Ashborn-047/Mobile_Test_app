@@ -27,7 +27,7 @@ const QuickTipCard = () => (
   </Card>
 );
 
-const PersonalityDisplayCard = ({ profile, navigate }: { profile: PersonalityProfileV2 | null, navigate: (path: string) => void }) => (
+const PersonalityDisplayCard = ({ profile, navigate }: { profile: PersonalityProfileV2 | null, navigate: NavigateFunction }) => (
   <Card className={`${gradients.personalityCard} col-span-1 md:col-span-7 h-64 flex flex-col justify-between`}>
     <div>
       <h3 className="text-xl font-semibold text-white">Your Personality</h3>
@@ -42,7 +42,7 @@ const PersonalityDisplayCard = ({ profile, navigate }: { profile: PersonalityPro
   </Card>
 );
 
-const CareerMatchCard = ({ careers, navigate }: { careers: any[], navigate: (path: string) => void }) => (
+const CareerMatchCard = ({ careers, navigate }: { careers: any[], navigate: NavigateFunction }) => (
   <Card className={`${gradients.careerCard} col-span-1 md:col-span-5 h-64 flex flex-col justify-between`}>
     <div>
       <h3 className="text-xl font-semibold text-white">Career Match</h3>

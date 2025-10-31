@@ -1,8 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Card } from '../../../components/Card';
 import { Button } from '../../../components/Button';
-import { gradients } from '../../../theme';
 
 interface Book {
   id: string;

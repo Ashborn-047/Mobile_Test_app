@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '../../../components/Card';
 import { Button } from '../../../components/Button';
-import { Career } from '../../../utils/api';
+import { Career } from '../../../utils/types'; // Corrected import path for Career
 import { gradients } from '../../../theme';
 import { storage } from '../../../utils/storage';
 
