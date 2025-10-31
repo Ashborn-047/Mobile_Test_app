@@ -1,10 +1,10 @@
 const storage = {
-  setItem: (key: string, value: any): void => {
+  setItem: (key: string, value: unknown): void => {
     localStorage.setItem(key, JSON.stringify(value));
   },
-  getItem: (key: string): any => {
+  getItem: <T>(key: string): T | null => {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
+    return item ? (JSON.parse(item) as T) : null;
   },
   removeItem: (key: string): void => {
     localStorage.removeItem(key);
@@ -14,11 +14,11 @@ const storage = {
   },
 
   // ✅ Legacy aliases (for compatibility)
-  set<T = any>(key: string, value: T): void {
+  set<T>(key: string, value: T): void {
     this.setItem(key, value);
   },
-  get<T = any>(key: string): T | null {
-    return this.getItem(key);
+  get<T>(key: string): T | null {
+    return this.getItem<T>(key);
   },
 };
 

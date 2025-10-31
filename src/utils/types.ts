@@ -20,7 +20,7 @@ export interface ComparisonResult {
   trait: string;
   valueBefore: number;
   valueAfter: number;
-  change: 'up' | 'down' | 'same';
+  change: "up" | "down" | "same";
 }
 
 export interface QuizAnswer {
@@ -50,7 +50,7 @@ export interface Career {
 }
 
 export interface Meditation {
-  type: 'affirmation' | 'meditation';
+  type: "affirmation" | "meditation";
   text: string;
   duration: number;
   personalityInsight?: string; // Added for personality-based insights
@@ -72,7 +72,7 @@ export interface MoodEntry {
 
 export interface MeditationSession {
   id: string;
-  type: 'affirmation' | 'meditation';
+  type: "affirmation" | "meditation";
   text: string;
   duration: number;
   personalityInsight?: string;

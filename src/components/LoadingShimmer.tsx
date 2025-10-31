@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export const LoadingShimmer = () => {
   return (
@@ -13,12 +13,12 @@ export const LoadingShimmer = () => {
           <motion.div
             className="h-full bg-gradient-to-r from-transparent via-turquoise/20 to-transparent"
             animate={{
-              x: ['-100%', '100%'],
+              x: ["-100%", "100%"],
             }}
             transition={{
               duration: 1.5,
               repeat: Infinity,
-              ease: 'linear',
+              ease: "linear",
             }}
           />
         </motion.div>
@@ -26,4 +26,3 @@ export const LoadingShimmer = () => {
     </div>
   );
 };
-

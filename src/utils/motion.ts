@@ -1,12 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export const fadeInUp = {
   hidden: { opacity: 0, y: 12 },
   show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
+export const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
 // Simple scroll-reveal using IntersectionObserver
-export function useRevealOnScroll(ref: React.RefObject<HTMLElement>, onReveal: () => void) {
+export function useRevealOnScroll(
+  ref: React.RefObject<HTMLElement>,
+  onReveal: () => void,
+) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -19,11 +27,9 @@ export function useRevealOnScroll(ref: React.RefObject<HTMLElement>, onReveal: (
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, [ref, onReveal]);
 }
-
-

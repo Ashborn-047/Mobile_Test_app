@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 interface LayoutProps {
   children: ReactNode;
@@ -6,7 +6,10 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="min-h-screen text-turquoise" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
+    <div
+      className="min-h-screen text-turquoise"
+      style={{ fontFamily: "Inter, Poppins, sans-serif" }}
+    >
       <header className="px-6 py-4">
         {/* Header content can be extended later if needed */}
       </header>
@@ -17,5 +20,3 @@ export const Layout = ({ children }: LayoutProps) => {
     </div>
   );
 };
-
-

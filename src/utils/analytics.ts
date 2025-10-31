@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 const analytics = {
-  trackEvent: (event: string, data: Record<string, any>) => {
-    console.log(`Event tracked: ${event}`, data);
+  trackEvent: (event: string, data: Record<string, unknown>) => {
+    if (typeof data === "object" && data !== null) {
+      console.log(`Event tracked: ${event}`, data);
+    } else {
+      console.log(`Event tracked: ${event} (no additional data)`);
+    }
     // Here you would typically send the event to your analytics service
   },
 
@@ -13,8 +17,8 @@ const analytics = {
 
   init: () => {
     // Initialize analytics service here
-    console.log('Analytics initialized');
-  }
+    console.log("Analytics initialized");
+  },
 };
 
 export const useAnalytics = () => {
