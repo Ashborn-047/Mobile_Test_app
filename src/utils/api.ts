@@ -1,5 +1,7 @@
 // Mock API layer
 
+import { PersonalityProfileV2, Career, Meditation, Expense } from './types';
+
 export interface PersonalityProfile {
   id: string;
   traits: string[];
@@ -35,28 +37,16 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const api = {
   // Personality Profiler
-  async submitPersonalityQuiz(_answers: Record<string, number>): Promise<PersonalityProfile> {
+  async submitPersonalityQuiz(_answers: Record<string, number>): Promise<PersonalityProfileV2> {
     await delay(1500);
-    
-    const traits = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'];
-    const radarData = traits.map(trait => ({
-      trait,
-      value: Math.floor(Math.random() * 60) + 40,
-    }));
-
-    return {
-      id: Date.now().toString(),
-      traits: traits.slice(0, 3),
-      summary: `You're a creative problem-solver with strong interpersonal skills. You thrive in collaborative environments and bring innovative ideas to the table. Your intuitive nature helps you navigate complex situations with ease.`,
-      radarData,
-      createdAt: new Date().toISOString(),
-    };
+    // This is now handled by generatePersonalitySummary in Personality/utils.ts
+    // and Personality/components/Results.tsx
+    throw new Error("This method is deprecated. Personality quiz logic moved to client-side utilities.");
   },
 
   // Career Compass
-  async getCareerRecommendations(_profileId: string): Promise<Career[]> {
+  async getCareerRecommendations(_profileId: string, profile: PersonalityProfileV2): Promise<Career[]> {
     await delay(1000);
-    
     const careers: Career[] = [
       {
         id: '1',
@@ -83,12 +73,32 @@ export const api = {
         progress: 30,
       },
     ];
+    // Mock logic to adjust matchScore based on personality traits
+    if (profile) {
+      const opennessTrait = profile.traits.find(t => t.trait === 'Openness');
+      const conscientiousnessTrait = profile.traits.find(t => t.trait === 'Conscientiousness');
+      const extraversionTrait = profile.traits.find(t => t.trait === 'Extraversion');
 
-    return careers;
+      if (opennessTrait && opennessTrait.value > 60) {
+        // Higher openness means better match for creative roles
+        careers[0].matchScore = Math.min(100, careers[0].matchScore + 5);
+      }
+      if (conscientiousnessTrait && conscientiousnessTrait.value > 70) {
+        // Higher conscientiousness means better match for structured roles
+        careers[1].matchScore = Math.min(100, careers[1].matchScore + 5);
+      }
+      if (extraversionTrait && extraversionTrait.value > 50) {
+        // Higher extraversion means better match for people-facing roles
+        careers[0].matchScore = Math.min(100, careers[0].matchScore + 3);
+        careers[1].matchScore = Math.min(100, careers[1].matchScore + 2);
+      }
+    }
+
+    return careers.sort((a, b) => b.matchScore - a.matchScore);
   },
 
   // MindMesh
-  async generateMeditation(mood: string, _goal: string, duration: number): Promise<Meditation> {
+  async generateMeditation(mood: string, _goal: string, duration: number, personalityProfile: PersonalityProfileV2 | null): Promise<Meditation> {
     await delay(1200);
     
     const affirmations = [
@@ -105,12 +115,39 @@ export const api = {
 
     const isAffirmation = mood.toLowerCase().includes('anxious') || mood.toLowerCase().includes('stressed');
     
+    let personalityInsight = "";
+    if (personalityProfile) {
+      const topTrait = personalityProfile.traits.sort((a, b) => b.value - a.value)[0];
+      if (topTrait) {
+        switch (topTrait.trait) {
+          case 'Openness':
+            personalityInsight = `As a creative individual, your mind thrives on exploration. Let your thoughts flow freely during this session.`;
+            break;
+          case 'Conscientiousness':
+            personalityInsight = `Your diligent nature benefits from structured mindfulness. Focus on the guided steps to maximize your calm.`;
+            break;
+          case 'Extraversion':
+            personalityInsight = `As an outgoing person, you might find group meditations or sharing your experience helpful. For now, embrace this personal moment.`;
+            break;
+          case 'Agreeableness':
+            personalityInsight = `Your empathetic spirit is a strength. Use this session to extend kindness to yourself, as you do to others.`;
+            break;
+          case 'Neuroticism':
+            personalityInsight = `For your sensitive nature, a gentle focus on breathing can anchor you. Acknowledge your feelings without judgment.`;
+            break;
+          default:
+            personalityInsight = `Your unique personality brings a special quality to mindfulness. Embrace it fully.`;
+        }
+      }
+    }
+
     return {
       type: isAffirmation ? 'affirmation' : 'meditation',
       text: isAffirmation 
         ? affirmations[Math.floor(Math.random() * affirmations.length)]
         : meditations[Math.floor(Math.random() * meditations.length)],
       duration,
+      personalityInsight,
     };
   },
 
