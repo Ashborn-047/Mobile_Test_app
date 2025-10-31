@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "../../../components/Card";
 import { Button } from "../../../components/Button";
 import { gradients } from "../../../theme";
-import { HybridCareer } from "./utils"; // Only import HybridCareer, not mockHybridCareers
+import { HybridCareer } from "../utils"; // Corrected path
 
 interface HybridCareerCardProps {
   career: HybridCareer;
@@ -69,7 +69,7 @@ export const HybridCareerCard = ({ career }: HybridCareerCardProps) => {
                     How to Combine:
                   </h3>
                   <ul className="list-disc list-inside space-y-1 text-dark-teal/90">
-                    {career.howToCombine.map((item, i) => (
+                    {career.howToCombine.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
                     ))}
                   </ul>
@@ -80,7 +80,7 @@ export const HybridCareerCard = ({ career }: HybridCareerCardProps) => {
                     Potential Income Streams:
                   </h3>
                   <ul className="list-disc list-inside space-y-1 text-dark-teal/90">
-                    {career.incomeStreams.map((item, i) => (
+                    {career.incomeStreams.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
                     ))}
                   </ul>
@@ -91,7 +91,7 @@ export const HybridCareerCard = ({ career }: HybridCareerCardProps) => {
                     Lifestyle Benefits:
                   </h3>
                   <ul className="list-disc list-inside space-y-1 text-dark-teal/90">
-                    {career.lifestyleBenefits.map((item, i) => (
+                    {career.lifestyleBenefits.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
                     ))}
                   </ul>

@@ -11,8 +11,8 @@ import { PersonalityProfileV2 } from "../Personality/types";
 import { CareerPathCard } from "./components/CareerPathCard"; // Import the new CareerPathCard
 import {
   HybridCareerCard,
-  mockHybridCareers,
-} from "./components/HybridCareerCard"; // Import HybridCareerCard and mock data
+} from "./components/HybridCareerCard"; // Import HybridCareerCard
+import { mockHybridCareers, HybridCareer } from "../utils"; // Import mock data and type
 import { CareerReadingList } from "./components/CareerReadingList"; // Import CareerReadingList
 import { CareerPeopleLikeYou } from "./components/CareerPeopleLikeYou"; // Import CareerPeopleLikeYou
 
@@ -60,7 +60,7 @@ export const CareerCompass = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 max-w-4xl mx-auto bg-cream-light text-dark-teal">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto bg-cream-light text-dark-teal">
       <Button
         onClick={() => navigate("/")}
         variant="secondary"
@@ -151,7 +151,7 @@ export const CareerCompass = () => {
               Beyond Traditional Paths
             </h2>
             <div className="flex overflow-x-auto pb-4 space-x-4">
-              {mockHybridCareers.map((hybridCareer) => (
+              {mockHybridCareers.map((hybridCareer: HybridCareer) => (
                 <HybridCareerCard key={hybridCareer.id} career={hybridCareer} />
               ))}
             </div>
