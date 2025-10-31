@@ -10,6 +10,10 @@ export interface PersonalityProfileV2 {
   radarData: PersonalityTrait[];
   createdAt: string;
   emoji: string; 
+  brainDominance: number;
+  personalityType: string;
+  superpower: string;
+  challenge: string;
 }
 
 export interface ComparisonResult {

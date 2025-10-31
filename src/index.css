@@ -10,7 +10,7 @@
 
 body {
   font-family: 'Poppins', 'Inter', sans-serif;
-  background: linear-gradient(135deg, #021b17 0%, #05352d 50%, #0a4d42 100%);
+  background-color: #F7F6F3; /* Light cream background */
   min-height: 100vh;
   color: #09dac6;
 }
