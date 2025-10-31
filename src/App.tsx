@@ -1,7 +1,7 @@
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Dashboard } from './modules/Dashboard/Dashboard';
-import { PersonalityProfiler } from './modules/PersonalityProfiler/PersonalityProfiler';
+import { PersonalityPage } from './modules/Personality/index';
 import { CareerCompass } from './modules/CareerCompass/CareerCompass';
 import { MindMesh } from './modules/MindMesh/MindMesh';
 import { BudgetBuddy } from './modules/BudgetBuddy/BudgetBuddy';
@@ -30,7 +30,7 @@ function RouteTransitions() {
       >
         <Routes location={location}>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/personality" element={<PersonalityProfiler />} />
+          <Route path="/personality" element={<PersonalityPage />} />
           <Route path="/career" element={<CareerCompass />} />
           <Route path="/mindmesh" element={<MindMesh />} />
           <Route path="/budget" element={<BudgetBuddy />} />
