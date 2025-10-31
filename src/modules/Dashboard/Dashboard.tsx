@@ -22,7 +22,7 @@ interface DailySync {
 
 // Placeholder components for the new Bento grid cards
 const DailySyncCard = ({ dailySync }: { dailySync: DailySync }) => (
-  <Card className={`${gradients.dailySyncCard} col-span-1 md:col-span-6 h-48`}>
+  <Card className={`${gradients.dailySyncCard} col-span-1 sm:col-span-1 md:col-span-6 lg:col-span-3 h-48`}>
     <h3 className="text-xl font-semibold text-white">Daily Sync</h3>
     <p className="text-white/80">Mood: {dailySync?.mood || "Neutral"}</p>
     <p className="text-white/80">
@@ -33,7 +33,7 @@ const DailySyncCard = ({ dailySync }: { dailySync: DailySync }) => (
 );
 
 const QuickTipCard = () => (
-  <Card className={`${gradients.quickTipCard} col-span-1 md:col-span-3 h-48`}>
+  <Card className={`${gradients.quickTipCard} col-span-1 sm:col-span-1 md:col-span-6 lg:col-span-3 h-48`}>
     <h3 className="text-xl font-semibold text-dark-teal">💡 Quick Tip</h3>
     <p className="text-dark-teal/80">"Embrace change for growth!"</p>
   </Card>
@@ -185,34 +185,34 @@ const QuickActionButtons = ({
 }) => (
   <motion.div
     variants={itemVariants}
-    className="col-span-1 md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-6"
+    className="col-span-1 sm:col-span-2 md:col-span-12 lg:col-span-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
   >
     <Button
-      className={`${gradients.quickActionsCard} col-span-2`}
+      className={`${gradients.quickActionsCard} col-span-1`}
       onClick={() => navigate("/personality")}
     >
       Take Quiz
     </Button>
     <Button
-      className={`${gradients.quickActionsCard} col-span-3`}
+      className={`${gradients.quickActionsCard} col-span-1`}
       onClick={() => navigate("/career")}
     >
       Explore Careers
     </Button>
     <Button
-      className={`${gradients.quickActionsCard} col-span-2`}
+      className={`${gradients.quickActionsCard} col-span-1`}
       onClick={() => navigate("/mindmesh")}
     >
       Mind Mesh
     </Button>
     <Button
-      className={`${gradients.quickActionsCard} col-span-3`}
+      className={`${gradients.quickActionsCard} col-span-1`}
       onClick={() => navigate("/budget")}
     >
       Budget Buddy
     </Button>
     <Button
-      className={`${gradients.quickActionsCard} col-span-2`}
+      className={`${gradients.quickActionsCard} col-span-1`}
       onClick={onShowStats}
     >
       Stats Card
@@ -344,7 +344,7 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen p-6 max-w-6xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <Notification
         message="Your personality profile is over 90 days old. Consider retaking the quiz for updated insights!"
         type="info"
@@ -410,9 +410,9 @@ export const Dashboard = () => {
         variants={{
           visible: { transition: { staggerChildren: 0.1 } },
         }}
-        className="grid grid-cols-1 md:grid-cols-12 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-6"
       >
-        <ProfileCard profile={currentProfile} />
+        <ProfileCard profile={currentProfile} className="col-span-1 md:col-span-12 lg:col-span-6"/>
         <DailySyncCard
           dailySync={
             dailySync || {
