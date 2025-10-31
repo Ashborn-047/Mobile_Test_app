@@ -16,13 +16,13 @@ export const MindMesh = () => {
   const [goal, setGoal] = useState('');
   const [duration, setDuration] = useState(5);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Meditation | null>(null);
+  const [result, setResult] = useState<MeditationSession | null>(null); // Use MeditationSession here
   const [breathing, setBreathing] = useState(false);
   const [moodHistory, setMoodHistory] = useState<MoodEntry[]>([]); // New state for mood history
   const [meditationHistory, setMeditationHistory] = useState<MeditationSession[]>([]); // New state for meditation history
 
   useEffect(() => {
-    const saved = storage.get<Meditation>('lastMeditation');
+    const saved = storage.get<MeditationSession>('lastMeditation'); // Use MeditationSession here
     if (saved) {
       setResult(saved);
     }
