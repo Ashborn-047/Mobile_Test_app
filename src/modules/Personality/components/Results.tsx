@@ -7,14 +7,15 @@ import { LoadingShimmer } from "../../../../src/components/LoadingShimmer";
 // import { RadarChartComponent } from '../../../../src/components/RadarChart'; // Removed unused import
 import { PersonalityProfileV2 /*, PersonalityTrait */ } from "../types"; // Removed unused PersonalityTrait import
 import { storage } from "../../../../src/utils/storage";
-import { generatePersonalitySummary } from "../utils";
+import { calculatePersonalityResult, PersonalityResult, QuizAnswer } from "../calculatePersonalityResult"; // New imports
+import { personalityQuestions } from "../personalityQuestions"; // New import
 import { AnimatedAvatarV2 } from "./AnimatedAvatarV2";
 // import { ResultsCard } from './ResultsCard'; // Removed unused import
 import { generatePersonalityCard } from "../../../../src/utils/share"; // Import share utility
 
 interface PersonalityResultsProps {
   onRetakeQuiz: () => void;
-  answers: Record<string, number>;
+  answers: QuizAnswer[]; // Updated type
 }
 
 export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
@@ -26,28 +27,40 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
   useEffect(() => {
     const saveAndSetProfile = async () => {
       setLoading(true);
-      const { summary, traits, emoji } = generatePersonalitySummary(answers);
-      // Mock brain dominance for now
-      const brainDominance = Math.floor(Math.random() * 100);
+
+      const calculatedResult: PersonalityResult = calculatePersonalityResult(answers);
+
+      // Simple emoji mapping based on dominant trait for now
+      let emoji = "🧠";
+      if (calculatedResult.dominantTraits.includes("openness")) emoji = "💡";
+      else if (calculatedResult.dominantTraits.includes("conscientiousness")) emoji = "🎯";
+      else if (calculatedResult.dominantTraits.includes("extraversion")) emoji = "⚡";
+      else if (calculatedResult.dominantTraits.includes("agreeableness")) emoji = "🤝";
+      else if (calculatedResult.dominantTraits.includes("neuroticism")) emoji = "🤔";
 
       const newProfile: PersonalityProfileV2 = {
         id: Date.now().toString(),
-        summary,
-        traits: traits.map((t) => ({
-          ...t,
-          value: Math.min(100, Math.max(0, t.value)),
-        })), // Ensure values are 0-100
-        radarData: traits.map((t) => ({
-          ...t,
-          value: Math.min(100, Math.max(0, t.value)),
-        })), // Using traits directly for radar data for simplicity
+        summary: calculatedResult.summary,
+        traits: [
+          { trait: "Openness", value: calculatedResult.openness },
+          { trait: "Conscientiousness", value: calculatedResult.conscientiousness },
+          { trait: "Extraversion", value: calculatedResult.extraversion },
+          { trait: "Agreeableness", value: calculatedResult.agreeableness },
+          { trait: "Neuroticism", value: calculatedResult.neuroticism },
+        ],
+        radarData: [
+          { trait: "Openness", value: calculatedResult.openness },
+          { trait: "Conscientiousness", value: calculatedResult.conscientiousness },
+          { trait: "Extraversion", value: calculatedResult.extraversion },
+          { trait: "Agreeableness", value: calculatedResult.agreeableness },          { trait: "Neuroticism", value: calculatedResult.neuroticism },
+        ],
         createdAt: new Date().toISOString(),
-        emoji,
-        brainDominance: brainDominance, // Add brainDominance to the profile type
-        personalityType: "Creative Visionary", // Mock
-        superpower: "Innovation", // Mock
-        challenge: "Follow-through", // Mock
-      } as PersonalityProfileV2; // Cast to bypass TS issues with new fields temporarily
+        emoji: emoji, // Dynamic emoji based on dominant trait
+        brainDominance: Math.floor(Math.random() * 100), // Mock for now
+        personalityType: calculatedResult.personalityType,
+        superpower: calculatedResult.dominantTraits[0] || "Adaptability", // Use first dominant trait as superpower
+        challenge: calculatedResult.dominantTraits[1] || "Balance", // Use second dominant trait as challenge
+      };
 
       const existingProfiles =
         storage.get<PersonalityProfileV2[]>("personalityHistory") || [];

@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../../../src/components/Button";
 import { ProgressBar } from "../../../../src/components/ProgressBar";
 import { Card } from "../../../../src/components/Card";
-import { personalityQuestions } from "../utils";
+import { personalityQuestions } from "../personalityQuestions"; // Updated import path
+import { QuizAnswer } from "../calculatePersonalityResult"; // Import QuizAnswer interface
 
 interface PersonalityQuizProps {
-  onComplete: (answers: Record<string, number>) => void;
+  onComplete: (answers: QuizAnswer[]) => void; // Updated type
   onBack: () => void;
 }
 
@@ -15,26 +16,39 @@ export const PersonalityQuiz = ({
   onBack,
 }: PersonalityQuizProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<QuizAnswer[]>([]); // Updated state type
 
   const handleAnswer = (value: number) => {
-    const newAnswers = {
-      ...answers,
-      [personalityQuestions[currentIndex].id]: value,
+    const currentQuestion = personalityQuestions[currentIndex];
+    const newAnswer: QuizAnswer = {
+      id: currentQuestion.id,
+      category: currentQuestion.category,
+      score: value,
     };
-    setAnswers(newAnswers);
+
+    const existingAnswerIndex = answers.findIndex( (ans) => ans.id === newAnswer.id );
+
+    let updatedAnswers: QuizAnswer[];
+    if (existingAnswerIndex !== -1) {
+      updatedAnswers = answers.map((ans, index) =>
+        index === existingAnswerIndex ? newAnswer : ans
+      );
+    } else {
+      updatedAnswers = [...answers, newAnswer];
+    }
+    setAnswers(updatedAnswers);
 
     if (currentIndex < personalityQuestions.length - 1) {
       setTimeout(() => setCurrentIndex(currentIndex + 1), 300);
     } else {
-      setTimeout(() => onComplete(newAnswers), 300);
+      setTimeout(() => onComplete(updatedAnswers), 300);
     }
   };
 
   const progress = ((currentIndex + 1) / personalityQuestions.length) * 100;
 
   return (
-    <div className="min-h-screen p-6 max-w-4xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <Button onClick={onBack} variant="secondary" className="mb-6">
         ← Back
       </Button>
@@ -62,7 +76,9 @@ export const PersonalityQuiz = ({
                   key={value}
                   onClick={() => handleAnswer(value)}
                   variant={
-                    answers[personalityQuestions[currentIndex].id] === value
+                    answers.find(
+                      (ans) => ans.id === personalityQuestions[currentIndex].id,
+                    )?.score === value
                       ? "primary"
                       : "secondary"
                   }
