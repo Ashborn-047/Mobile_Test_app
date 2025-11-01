@@ -12,7 +12,7 @@ import { CareerPathCard } from "./components/CareerPathCard"; // Import the new 
 import {
   HybridCareerCard,
 } from "./components/HybridCareerCard"; // Import HybridCareerCard
-import { mockHybridCareers, HybridCareer } from "../utils"; // Import mock data and type
+import { mockHybridCareers, HybridCareer } from "./utils"; // Corrected import path
 import { CareerReadingList } from "./components/CareerReadingList"; // Import CareerReadingList
 import { CareerPeopleLikeYou } from "./components/CareerPeopleLikeYou"; // Import CareerPeopleLikeYou
 

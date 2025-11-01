@@ -1,10 +1,13 @@
 import { motion, MotionProps } from "framer-motion";
 import { ReactNode } from "react";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, MotionProps {
+interface ButtonProps extends MotionProps {
   children: ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 export const Button = ({

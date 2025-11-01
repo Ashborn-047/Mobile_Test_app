@@ -6,11 +6,11 @@ import { Button } from "../../components/Button";
 import { storage } from "../../utils/storage";
 import { WelcomeModal } from "../../components/WelcomeModal";
 import { Notification } from "../../components/common/Notification"; // Import Notification component
-import { PersonalityProfileV2, Career } from "../Personality/types"; // Import Career type
+import { PersonalityProfileV2 } from "../Personality/types";
+import { Career, Expense } from "../../utils/types";
 import { gradients } from "../../theme"; // Import gradients from theme.ts
 import { ProfileCard } from "./components/ProfileCard"; // Import the new ProfileCard
 import { api } from "../../utils/api"; // Import the API utility
-import { Expense } from "../../utils/types"; // Import Expense type
 import { itemVariants } from "../../utils/motion"; // Import itemVariants from motion utils
 
 interface DailySync {

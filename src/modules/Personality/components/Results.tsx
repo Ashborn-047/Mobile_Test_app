@@ -120,7 +120,7 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
   );
 
   return (
-    <div className="min-h-screen relative">
+    <div className="relative">
       <Confetti />
       {/* HERO SECTION */}
       <motion.div
@@ -258,7 +258,7 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">💬 Communication Style</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Extraversion")?.value >
+                {(profile.traits.find((t) => t.trait === "Extraversion")?.value ?? 0) >
                 60
                   ? "You're an expressive storyteller, engaging others with ease."
                   : "You prefer concise, clear communication, valuing depth over breadth."}
@@ -267,7 +267,7 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">📚 Learning Preference</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Openness")?.value > 70
+                {(profile.traits.find((t) => t.trait === "Openness")?.value ?? 0) > 70
                   ? "Hands-on experimentation and exploring new concepts excites you."
                   : "You prefer structured learning, mastering fundamentals before innovation."}
               </p>
@@ -275,8 +275,8 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">🔧 Problem Solving</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Conscientiousness")
-                  ?.value < 40
+                {(profile.traits.find((t) => t.trait === "Conscientiousness")
+                  ?.value ?? 0) < 40
                   ? "You tackle problems with creative, out-of-the-box solutions."
                   : "You approach challenges systematically, focusing on root causes and efficiency."}
               </p>
@@ -330,11 +330,11 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">As a Friend</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Agreeableness")
-                  ?.value > 70
+                {(profile.traits.find((t) => t.trait === "Agreeableness")
+                  ?.value ?? 0) > 70
                   ? "You're a deeply empathetic and supportive friend, always there to listen."
-                  : profile.traits.find((t) => t.trait === "Extraversion")
-                        ?.value > 60
+                  : (profile.traits.find((t) => t.trait === "Extraversion")
+                        ?.value ?? 0) > 60
                     ? "Your vibrant energy makes you the life of any social gathering."
                     : "You're a loyal and thoughtful friend, valuing deep connections."}
               </p>
@@ -344,8 +344,8 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
               <p className="text-gray-700">
                 {profile.personalityType.includes("Visionary")
                   ? "You're a visionary leader, inspiring others with bold ideas and a clear direction."
-                  : profile.traits.find((t) => t.trait === "Conscientiousness")
-                        ?.value > 70
+                  : (profile.traits.find((t) => t.trait === "Conscientiousness")
+                        ?.value ?? 0) > 70
                     ? "You lead with meticulous planning and a focus on achieving tangible results."
                     : "You lead by example, fostering a collaborative and supportive environment."}
               </p>
@@ -353,11 +353,11 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">In Teams</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Agreeableness")
-                  ?.value > 60
+                {(profile.traits.find((t) => t.trait === "Agreeableness")
+                  ?.value ?? 0) > 60
                   ? "You excel in collaborative teams, mediating conflicts and building consensus."
-                  : profile.traits.find((t) => t.trait === "Extraversion")
-                        ?.value > 50
+                  : (profile.traits.find((t) => t.trait === "Extraversion")
+                        ?.value ?? 0) > 50
                     ? "You energize team discussions, bringing new perspectives and driving momentum."
                     : "You contribute thoughtfully, ensuring quality and attention to detail."}
               </p>
@@ -365,10 +365,10 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">Your People Need</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Agreeableness")
-                  ?.value > 60
+                {(profile.traits.find((t) => t.trait === "Agreeableness")
+                  ?.value ?? 0) > 60
                   ? "They need your compassion and understanding to thrive."
-                  : profile.traits.find((t) => t.trait === "Openness")?.value >
+                  : (profile.traits.find((t) => t.trait === "Openness")?.value ?? 0) >
                       60
                     ? "They need your innovative spirit to break new ground."
                     : "They thrive with your clear direction and steadfast support."}
@@ -386,10 +386,10 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">Work Environment</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Openness")?.value > 70
+                {(profile.traits.find((t) => t.trait === "Openness")?.value ?? 0) > 70
                   ? "You thrive in dynamic, creative environments that encourage exploration."
-                  : profile.traits.find((t) => t.trait === "Conscientiousness")
-                        ?.value > 60
+                  : (profile.traits.find((t) => t.trait === "Conscientiousness")
+                        ?.value ?? 0) > 60
                     ? "A structured, organized setting where efficiency is valued suits you best."
                     : "You prefer a balanced environment, blending collaboration with independent work."}
               </p>
@@ -404,10 +404,10 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">Productivity Style</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Conscientiousness")
-                  ?.value > 60
+                {(profile.traits.find((t) => t.trait === "Conscientiousness")
+                  ?.value ?? 0) > 60
                   ? "You excel with structured routines and meticulously planned tasks."
-                  : profile.traits.find((t) => t.trait === "Openness")?.value >
+                  : (profile.traits.find((t) => t.trait === "Openness")?.value ?? 0) >
                       50
                     ? "You're most productive in bursts of creative energy, often switching between tasks."
                     : "You maintain a steady pace, consistently moving forward with tasks."}
@@ -416,7 +416,7 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card>
               <h3 className="font-semibold text-lg">Stress Response</h3>
               <p className="text-gray-700">
-                {profile.traits.find((t) => t.trait === "Neuroticism")?.value >
+                {(profile.traits.find((t) => t.trait === "Neuroticism")?.value ?? 0) >
                 60
                   ? "You tend to internalize stress, benefiting from mindfulness and self-care practices."
                   : "You actively seek solutions and externalize stress through action or discussion."}
@@ -436,14 +436,14 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
                 ✅ YOU'RE BUILT FOR
               </h3>
               <ul className="list-disc list-inside space-y-1">
-                {profile.traits.find((t) => t.trait === "Openness")?.value >
+                {(profile.traits.find((t) => t.trait === "Openness")?.value ?? 0) >
                   60 && <li>Innovation & Creative Problem Solving</li>}
-                {profile.traits.find((t) => t.trait === "Conscientiousness")
-                  ?.value > 60 && <li>Structured Execution & Planning</li>}
-                {profile.traits.find((t) => t.trait === "Extraversion")?.value >
+                {(profile.traits.find((t) => t.trait === "Conscientiousness")
+                  ?.value ?? 0) > 60 && <li>Structured Execution & Planning</li>}
+                {(profile.traits.find((t) => t.trait === "Extraversion")?.value ?? 0) >
                   60 && <li>Leadership & Public Speaking</li>}
-                {profile.traits.find((t) => t.trait === "Agreeableness")
-                  ?.value > 60 && <li>Team Collaboration & Mentorship</li>}
+                {(profile.traits.find((t) => t.trait === "Agreeableness")
+                  ?.value ?? 0) > 60 && <li>Team Collaboration & Mentorship</li>}
                 {profile.brainDominance > 50 && (
                   <li>Big-Picture Strategy & Vision</li>
                 )}
@@ -455,14 +455,14 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             <Card className="bg-red-50 border-red-200 text-red-900">
               <h3 className="font-semibold text-xl mb-3">❌ AVOID THESE</h3>
               <ul className="list-disc list-inside space-y-1">
-                {profile.traits.find((t) => t.trait === "Openness")?.value <
+                {(profile.traits.find((t) => t.trait === "Openness")?.value ?? 0) <
                   40 && <li>Highly Repetitive & Monotonous Tasks</li>}
-                {profile.traits.find((t) => t.trait === "Conscientiousness")
-                  ?.value < 40 && <li>Unstructured & Ambiguous Roles</li>}
-                {profile.traits.find((t) => t.trait === "Extraversion")?.value <
+                {(profile.traits.find((t) => t.trait === "Conscientiousness")
+                  ?.value ?? 0) < 40 && <li>Unstructured & Ambiguous Roles</li>}
+                {(profile.traits.find((t) => t.trait === "Extraversion")?.value ?? 0) <
                   40 && <li>Constant Public Interaction Roles</li>}
-                {profile.traits.find((t) => t.trait === "Agreeableness")
-                  ?.value < 40 && (
+                {(profile.traits.find((t) => t.trait === "Agreeableness")
+                  ?.value ?? 0) < 40 && (
                   <li>Conflict-Heavy & Uncollaborative Environments</li>
                 )}
                 {profile.brainDominance > 70 && (
@@ -517,7 +517,7 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
               .filter((p) =>
                 p.traits.some(
                   (t) =>
-                    (profile.traits.find((pt) => pt.trait === t)?.value || 0) >
+                    ((profile.traits.find((pt) => pt.trait === t)?.value) ?? 0) >
                     60,
                 ),
               )
@@ -543,7 +543,7 @@ export const Results = ({ onRetakeQuiz, answers }: PersonalityResultsProps) => {
             id="shareable-personality-card"
             className="w-full max-w-sm rounded-xl overflow-hidden shadow-lg p-6 text-white text-center"
             style={{
-              background: `linear-gradient(135deg, ${profile.traits[0]?.value > 50 ? "#09dac6" : "#9b87f5"} 0%, ${profile.traits[1]?.value > 50 ? "#05352d" : "#7e69ab"} 100%)`,
+              background: `linear-gradient(135deg, ${((profile.traits[0]?.value) ?? 0) > 50 ? "#09dac6" : "#9b87f5"} 0%, ${((profile.traits[1]?.value) ?? 0) > 50 ? "#05352d" : "#7e69ab"} 100%)`,
             }}
           >
             <AnimatedAvatarV2 emoji={profile.emoji} size="lg" />

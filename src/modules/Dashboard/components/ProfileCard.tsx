@@ -9,6 +9,7 @@ import { gradients } from "../../../theme";
 
 interface ProfileCardProps {
   profile: PersonalityProfileV2 | null;
+  className?: string;
   // Add any other props needed for profile completion, etc.
 }
 
