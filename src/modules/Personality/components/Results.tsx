@@ -8,7 +8,7 @@ import { LoadingShimmer } from "../../../../src/components/LoadingShimmer";
 import { PersonalityProfileV2 /*, PersonalityTrait */ } from "../types"; // Removed unused PersonalityTrait import
 import { storage } from "../../../../src/utils/storage";
 import { calculatePersonalityResult, PersonalityResult, QuizAnswer } from "../calculatePersonalityResult"; // New imports
-import { personalityQuestions } from "../personalityQuestions"; // New import
+// import { personalityQuestions } from "../personalityQuestions"; // Removed unused import
 import { AnimatedAvatarV2 } from "./AnimatedAvatarV2";
 // import { ResultsCard } from './ResultsCard'; // Removed unused import
 import { generatePersonalityCard } from "../../../../src/utils/share"; // Import share utility

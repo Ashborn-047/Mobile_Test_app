@@ -8,6 +8,7 @@ import { storage } from "../../utils/storage";
 import { PersonalityProfileV2 } from "./types";
 import { Results } from "./components/Results";
 import { PersonalityQuiz } from "./components/PersonalityQuiz";
+import { QuizAnswer } from "./calculatePersonalityResult"; // Import QuizAnswer interface
 
 // Main Personality Page Component
 export const PersonalityPage = () => {
@@ -15,7 +16,7 @@ export const PersonalityPage = () => {
   const [currentProfile, setCurrentProfile] =
     useState<PersonalityProfileV2 | null>(null);
   const [showQuiz, setShowQuiz] = useState(false);
-  const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
+  const [quizAnswers, setQuizAnswers] = useState<QuizAnswer[]>([]); // Updated state type
 
   useEffect(() => {
     const saved = storage.get<PersonalityProfileV2>(
@@ -26,7 +27,7 @@ export const PersonalityPage = () => {
     }
   }, []);
 
-  const handleQuizComplete = (answers: Record<string, number>) => {
+  const handleQuizComplete = (answers: QuizAnswer[]) => {
     setQuizAnswers(answers);
     setShowQuiz(false);
     // The Results component will handle saving to history and setting current profile
@@ -34,7 +35,7 @@ export const PersonalityPage = () => {
 
   const handleRetakeQuiz = () => {
     setCurrentProfile(null);
-    setQuizAnswers({});
+    setQuizAnswers([]); // Reset to empty array
     setShowQuiz(true);
   };
 
@@ -48,12 +49,12 @@ export const PersonalityPage = () => {
   }
 
   // Display results if a profile exists or quiz just completed
-  if (currentProfile || Object.keys(quizAnswers).length > 0) {
+  if (currentProfile || quizAnswers.length > 0) { // Check length for new type
     return <Results onRetakeQuiz={handleRetakeQuiz} answers={quizAnswers} />;
   }
 
   return (
-    <div className="min-h-screen p-6 max-w-4xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <Button
         onClick={() => navigate("/")}
         variant="secondary"
